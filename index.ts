@@ -1,10 +1,13 @@
-import * as readline from 'node:readline/promises';
-import { stdin as input, stdout as output } from 'node:process';
-
-const rl = readline.createInterface({ input, output });
+import {Game} from "./lib/game.js";
 
 console.log("Welcome to the amazing memory game!")
-const name = await rl.question("What's your name? ")
-console.log(`Hello ${name}!`)
 console.log("Let's start the game!")
 
+let game: Game | null = new Game();
+await game.loadWords("./resources/wordlist.txt");
+
+await game.play();
+
+console.log("Thanks for playing!");
+
+game.close();
